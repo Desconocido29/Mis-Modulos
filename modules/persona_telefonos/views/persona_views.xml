@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Acción -->
+    <record id="action_persona_persona" model="ir.actions.act_window">
+        <field name="name">Personas</field>
+        <field name="res_model">persona.persona</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primera persona con su historial de teléfonos.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vista de lista -->
+    <record id="view_persona_list" model="ir.ui.view">
+        <field name="name">persona.persona.list</field>
+        <field name="model">persona.persona</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="edad"/>
+                <field name="telefono_count" string="Cantidad de teléfonos"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario -->
+    <record id="view_persona_form" model="ir.ui.view">
+        <field name="name">persona.persona.form</field>
+        <field name="model">persona.persona</field>
+        <field name="arch" type="xml">
+            <form string="Persona">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="edad"/>
+                        <field name="telefono_count" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Teléfonos">
+                            <field name="telefono_ids">
+                                <list editable="bottom">
+                                    <field name="numero"/>
+                                    <field name="tipo"/>
+                                    <field name="fecha_registro"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="menu_persona_root" name="Personas" sequence="10"/>
+    <menuitem id="menu_persona_manage" name="Gestión" parent="menu_persona_root" sequence="1" action="action_persona_persona"/>
+</odoo>

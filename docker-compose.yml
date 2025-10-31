@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:15
@@ -6,7 +8,8 @@ services:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
     volumes:
-      - ./postgresql_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
 
   odoo:
     image: odoo:18
@@ -21,4 +24,7 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo
-      - PROXY_MODE=True
+    restart: always
+
+volumes:
+  postgres_data:
